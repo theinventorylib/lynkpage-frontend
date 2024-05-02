@@ -1,0 +1,43 @@
+exclude: "^backend/docs/|/migrations/"
+default_stages: [commit]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: detect-private-key
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: "v8.54.0"
+    # run with --fix to fix errors
+    hooks:
+      - id: eslint
+        entry: ./frontend/node_modules/.bin/eslint --fix
+        files: \.[jt]sx?$ # *.js, *.jsx, *.ts and *.tsx
+        types: [file]
+        types_or: [javascript, jsx, ts, tsx, vue]
+        exclude: ^backend/
+        additional_dependencies:
+          - prettier@2.3.2
+          - eslint-config-prettier@8.3.0
+          - eslint-plugin-prettier@3.4.0
+          - eslint-plugin-vue@7.12.1
+          - eslint-plugin-nuxt@2.0.0
+          - eslint-plugin-import@2.23.4
+          - eslint-import-resolver-typescript@2.5.0
+
+# sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
+ci:
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false

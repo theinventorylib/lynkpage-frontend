@@ -1,0 +1,58 @@
+{
+  "extends": [
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "prettier",
+    "plugin:vue/vue3-recommended", // https://eslint.vuejs.org/rules/
+    "plugin:nuxt/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "import"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": [
+          "./tsconfig.json", // root tsconfig
+          "./.nuxt/tsconfig.json"
+        ]
+      },
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".vue"]
+      }
+    }
+  },
+  "parserOptions": {
+    "extraFileExtensions": [".vue"],
+    "tsconfigRootDir": "./", // root tsconfig
+    "parser": "@typescript-eslint/parser",
+    "project": [
+      "./tsconfig.json", // root tsconfig
+      "./.nuxt/tsconfig.json"
+    ]
+  },
+  "rules": {
+    // no-unresolved temp fix for pinia
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "": "never", // index files
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
+    "linebreak-style": ["error", "unix"],
+    "vue/multi-word-component-names": "off",
+    // comma dangle
+    "comma-dangle": ["error", "only-multiline"],
+    // no-console
+    "no-console": ["error", { "allow": ["warn", "error"] }]
+  }
+}

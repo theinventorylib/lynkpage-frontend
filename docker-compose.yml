@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  lynkpage-frontend:
+    build:
+      dockerfile: Dockerfile
+      args:
+        - NUXT_PUBLIC_API_URL=${NUXT_PUBLIC_API_URL}
+        - NUXT_PUBLIC_HOME_URL=${NUXT_PUBLIC_HOME_URL}
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - lynk
+
+networks:
+  lynk:
+    driver: bridge
+    external: false
+

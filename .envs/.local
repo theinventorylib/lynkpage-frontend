@@ -1,0 +1,7 @@
+# Api to the django backend
+NUXT_API_URL="http://django:8000/"
+NUXT_PUBLIC_API_URL="http://django:8000/"
+
+# Home/Local Url for running Nuxt locally
+NUXT_HOME_URL="http://localhost:3000/"
+NUXT_PUBLIC_HOME_URL="http://localhost:3000/"
