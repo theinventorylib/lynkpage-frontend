@@ -31,7 +31,6 @@
     "nuxt-icon": "^0.5.0",
     "postcss": "^8.4.26",
     "tailwindcss": "^3.3.5",
-
     "@nuxt/test-utils": "^3.8.1",
     "@types/markdown-it": "^13.0.7",
     "@typescript-eslint/eslint-plugin": "^6.19.0",

@@ -1,48 +1,42 @@
-ARG NODE_VERSION=lts-alpine
-# Build step 1: initializing node_modules and preparing compiled builds
-FROM node:lts-alpine as base
+ARG NODE_IMAGE=oven/bun:1-alpine
 
-# ARG BUILD_ENVIRONMENT=production
+# Stage one - Base
+FROM --platform=linux/amd64 $NODE_IMAGE AS base
+
 ARG APP_HOME=/app
 
-# npm build
-FROM base as deps
 WORKDIR ${APP_HOME}
-COPY package.json ./
 
-# update npm
-RUN npm install -g npm@latest
+# RUN apk --no-cache add openssh g++ make python3 git
 
-# set npm config for proxy and long timeout
-# Remove Proxies
-RUN npm config rm proxy
-RUN npm config rm https-proxy
+# Stage two - Installing Deps
+FROM base as install
 
-RUN npm install
+RUN mkdir -p /temp/
 
-FROM base as build
-WORKDIR ${APP_HOME}
-COPY --from=deps ${APP_HOME}/node_modules ./node_modules
+COPY package.json bun.lockb /temp/
+
+RUN cd /temp && bun install --frozen-lockfile
+
+# Stage three - Build
+FROM install as prerealease
+
+COPY --from=install /temp/node_modules node_modules
+
 COPY . .
 
-RUN npm prune
-
-# ARG NUXT_PUBLIC_HOME_URL
-# AENV NUXT_PUBLIC_HOME_URL=${NUXT_PUBLIC_HOME_URL}
-# AARG NUXT_PUBLIC_API_URL
-# AENV NUXT_PUBLIC_API_URL=${NUXT_PUBLIC_API_URL}
-
-RUN npm run build
-
-FROM base as prod
-WORKDIR ${APP_HOME}
 ENV NODE_ENV=production
 
-# AARG NUXT_PUBLIC_HOME_URL
-# AENV NUXT_PUBLIC_HOME_URL=${NUXT_PUBLIC_HOME_URL}
-# AARG NUXT_PUBLIC_API_URL
-# AENV NUXT_PUBLIC_API_URL=${NUXT_PUBLIC_API_URL}
+RUN bun run build
 
-COPY --from=build  ${APP_HOME}/.output ./.output
+# Stage Four - Production
+FROM base as release
 
-CMD [ "node", ".output/server/index.mjs" ]
+COPY --chown=bun:bun --from=install /temp/node_modules node_modules
+COPY --chown=bun:bun --from=prerealease ${APP_HOME}/.output .
+
+USER bun
+ENV HOST 0.0.0.0
+EXPOSE 3000
+
+ENTRYPOINT [ "bun", "run", "server/index.mjs"]
