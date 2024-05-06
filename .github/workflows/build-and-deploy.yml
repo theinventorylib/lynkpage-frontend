@@ -46,15 +46,16 @@ jobs:
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
           NUXT_PUBLIC_API_URL: ${{ secrets.NUXT_PUBLIC_API_URL }}
           NUXT_PUBLIC_HOME_URL: ${{ secrets.NUXT_PUBLIC_HOME_URL }}
+          GIT_SHA: ${{ git rev-parse --short HEAD }}
         run: |
           gcloud auth configure-docker africa-south1-docker.pkg.dev
           # docker build -t gcr.io/GOOGLE_PROJECT/$IMAGE_NAME:$GITHUB_SHA .
           # Build the image
           docker compose build --parallel --no-cache
           # Tag the image
-          docker tag lynkpage-frontend:latest africa-south1-docker.pkg.dev/$GOOGLE_PROJECT/lynkpage-frontend/lynkpage-frontend:$GITHUB_SHA
+          docker tag lynkpage-frontend:latest africa-south1-docker.pkg.dev/$GOOGLE_PROJECT/lynkpage-frontend/lynkpage-frontend:$GIT_SHA
           # Push the image
-          docker push africa-south1-docker.pkg.dev/$GOOGLE_PROJECT/lynkpage-frontend/lynkpage-frontend:$GITHUB_SHA
+          docker push africa-south1-docker.pkg.dev/$GOOGLE_PROJECT/lynkpage-frontend/lynkpage-frontend:$GIT_SHA
           # remove auth
           gcloud auth revoke --all
 
