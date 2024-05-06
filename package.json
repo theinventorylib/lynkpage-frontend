@@ -6,7 +6,16 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --ext .js,.vue ",
+    "lint:fix": "eslint --fix --ext .js,.vue",
+    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx,.vue --fix",
+    "pretty": "prettier --write .",
+    "pretty:check": "prettier --check .",
+    "test": "vitest run",
+    "test:ci": "vitest run",
+    "coverage": "vitest run --coverage"
+
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -16,12 +25,32 @@
     "@sentry/profiling-node": "^1.2.1",
     "@types/node": "^20.9.3",
     "autoprefixer": "^10.4.14",
-    "daisyui": "^3.2.1",
+    "daisyui": "^4.6.1",
     "nuxt": "^3.8.2",
     "nuxt-gtag": "^1.1.1",
     "nuxt-icon": "^0.5.0",
     "postcss": "^8.4.26",
-    "tailwindcss": "^3.3.5"
+    "tailwindcss": "^3.3.5",
+
+    "@nuxt/test-utils": "^3.8.1",
+    "@types/markdown-it": "^13.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "@vitest/coverage-v8": "^0.34.6",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-vue": "^9.18.1",
+    "jsdom": "^22.1.0",
+    "prettier": "^3.1.0",
+    "prettier-eslint": "^16.1.2",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+
   },
   "overrides": {
     "vue": "^3.3.4"
