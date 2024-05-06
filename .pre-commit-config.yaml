@@ -22,7 +22,7 @@ repos:
     # run with --fix to fix errors
     hooks:
       - id: eslint
-        entry: ./lynkpage-frontend/node_modules/.bin/eslint --fix
+        entry: ./node_modules/.bin/eslint --fix
         files: \.[jt]sx?$ # *.js, *.jsx, *.ts and *.tsx
         types: [file]
         types_or: [javascript, jsx, ts, tsx, vue]
