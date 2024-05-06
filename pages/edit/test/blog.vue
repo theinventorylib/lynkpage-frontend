@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sanitize } from "isomorphic-dompurify";
+// import { sanitize } from "isomorphic-dompurify";
 
 const content: ref<string> = ref("");
 
@@ -9,7 +9,8 @@ const updateContent = (newContent: string) => {
 
 const saveContent = () => {
   const htmlContent = content.value;
-  const sanitizedContent = sanitize(htmlContent);
+  // const sanitizedContent = sanitize(htmlContent);
+  const sanitizedContent = htmlContent;
   // Remove attributes starting with data-v-
   const filteredContent = sanitizedContent.replace(
     /(\s*)data-v-\w+="[^"]*"/g,

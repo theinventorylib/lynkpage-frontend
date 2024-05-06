@@ -10,6 +10,14 @@ FROM base as deps
 WORKDIR ${APP_HOME}
 COPY package.json ./
 
+# update npm
+RUN npm install -g npm@latest
+
+# set npm config for proxy and long timeout
+# Remove Proxies
+RUN npm config rm proxy
+RUN npm config rm https-proxy
+
 RUN npm install
 
 FROM base as build
@@ -38,4 +46,3 @@ ENV NODE_ENV=production
 COPY --from=build  ${APP_HOME}/.output ./.output
 
 CMD [ "node", ".output/server/index.mjs" ]
-
