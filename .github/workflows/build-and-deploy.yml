@@ -46,7 +46,7 @@ jobs:
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
           NUXT_PUBLIC_API_URL: ${{ secrets.NUXT_PUBLIC_API_URL }}
           NUXT_PUBLIC_HOME_URL: ${{ secrets.NUXT_PUBLIC_HOME_URL }}
-          GIT_SHA: ${{ git rev-parse --short HEAD }}
+          GIT_SHA: ${{ GITHUB_SHA | truncate(7, false) }}
         run: |
           gcloud auth configure-docker africa-south1-docker.pkg.dev
           # docker build -t gcr.io/GOOGLE_PROJECT/$IMAGE_NAME:$GITHUB_SHA .
