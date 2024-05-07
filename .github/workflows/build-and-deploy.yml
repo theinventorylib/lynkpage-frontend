@@ -59,6 +59,8 @@ jobs:
           GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
           NUXT_PUBLIC_API_URL: ${{ secrets.NUXT_PUBLIC_API_URL }}
           NUXT_PUBLIC_HOME_URL: ${{ secrets.NUXT_PUBLIC_HOME_URL }}
+          NUXT_PUBLIC_SENTRY_DSN: ${{ secrets.NUXT_PUBLIC_SENTRY_DSN }}
+          NUXT_PUBLIC_SENTRY_ENVIRONMENT: ${{ secrets.NUXT_PUBLIC_SENTRY_ENVIRONMENT }}
           # GIT_SHA: ${GITHUB_SHA::7}
         run: |
           gcloud auth configure-docker africa-south1-docker.pkg.dev

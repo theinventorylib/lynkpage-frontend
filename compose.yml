@@ -8,6 +8,8 @@ services:
         # if the env is not set, the default value is used
         - NUXT_PUBLIC_API_URL=${NUXT_PUBLIC_API_URL:-http://localhost:8000}
         - NUXT_PUBLIC_HOME_URL=${NUXT_PUBLIC_HOME_URL:-http://localhost:3000}
+        - NUXT_PUBLIC_SENTRY_DSN=${NUXT_PUBLIC_SENTRY_DSN:-}
+        - NUXT_PUBLIC_SENTRY_ENVIRONMENT=${NUXT_PUBLIC_SENTRY_ENVIRONMENT:-}
     image: lynkpage-frontend
     restart: always
     ports:

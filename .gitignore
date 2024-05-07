@@ -244,3 +244,6 @@ dump.rdb
 .output
 .nuxt
 .nitro
+
+# env Files
+.envs/.prod
