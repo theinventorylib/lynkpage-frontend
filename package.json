@@ -28,7 +28,7 @@
     "daisyui": "^4.6.1",
     "nuxt": "^3.8.2",
     "nuxt-gtag": "^1.1.1",
-    "nuxt-icon": "^0.5.0",
+    "nuxt-icon": "^0.6.10",
     "postcss": "^8.4.26",
     "tailwindcss": "^3.3.5",
     "@nuxt/test-utils": "^3.8.1",
